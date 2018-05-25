@@ -7,3 +7,17 @@
 //
 
 import Foundation
+
+struct User: Codable {
+    
+    let email: String
+    let password: String
+    let returnSecureToken: Bool
+    
+}
+
+struct UserResponse: Decodable {
+    let email: String
+    let idToken: String
+    let localId: String
+}

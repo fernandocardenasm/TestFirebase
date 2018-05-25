@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+class PostProduct: APIRequest {
+    typealias Response = Product?
+    
+    var resourceName: String {
+        return "/products"
+    }
+    
+}
