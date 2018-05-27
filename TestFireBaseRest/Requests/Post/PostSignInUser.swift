@@ -10,7 +10,7 @@ import Foundation
 
 class PostSignInUser: APIRequest {
     
-    typealias Response = UserResponse
+    typealias Response = UserLoggedIn
     
     var resourceName: String {
         return "/verifyPassword"

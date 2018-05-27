@@ -19,9 +19,10 @@
 		EDF76DBC20B6BD4C00F26C06 /* FireBaseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76DBB20B6BD4C00F26C06 /* FireBaseAPIClient.swift */; };
 		EDF76DBE20B7142200F26C06 /* PostProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76DBD20B7142200F26C06 /* PostProduct.swift */; };
 		EDF76DC020B72C7100F26C06 /* FireBaseAPIAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76DBF20B72C7100F26C06 /* FireBaseAPIAuthentication.swift */; };
-		EDF76DC220B72D9600F26C06 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76DC120B72D9600F26C06 /* User.swift */; };
 		EDF76DC420B7578700F26C06 /* PostSignInUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76DC320B7578700F26C06 /* PostSignInUser.swift */; };
 		EDF76DC620B7FB0600F26C06 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76DC520B7FB0600F26C06 /* ActionViewController.swift */; };
+		EDF76DCB20BB04D800F26C06 /* PutUserProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76DCA20BB04D800F26C06 /* PutUserProduct.swift */; };
+		EDF76DCD20BB0F2100F26C06 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF76DCC20BB0F2100F26C06 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,9 +40,10 @@
 		EDF76DBB20B6BD4C00F26C06 /* FireBaseAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseAPIClient.swift; sourceTree = "<group>"; };
 		EDF76DBD20B7142200F26C06 /* PostProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostProduct.swift; sourceTree = "<group>"; };
 		EDF76DBF20B72C7100F26C06 /* FireBaseAPIAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseAPIAuthentication.swift; sourceTree = "<group>"; };
-		EDF76DC120B72D9600F26C06 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		EDF76DC320B7578700F26C06 /* PostSignInUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSignInUser.swift; sourceTree = "<group>"; };
 		EDF76DC520B7FB0600F26C06 /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
+		EDF76DCA20BB04D800F26C06 /* PutUserProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PutUserProduct.swift; sourceTree = "<group>"; };
+		EDF76DCC20BB0F2100F26C06 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 		EDF76D9F20B6A8F600F26C06 /* TestFireBaseRest */ = {
 			isa = PBXGroup;
 			children = (
+				EDF76DC720BB02FA00F26C06 /* Requests */,
 				EDF76DB220B6B75900F26C06 /* Util */,
 				EDF76DA020B6A8F600F26C06 /* AppDelegate.swift */,
 				EDF76DA220B6A8F600F26C06 /* ViewController.swift */,
@@ -81,13 +84,10 @@
 				EDF76DA720B6A8F800F26C06 /* Assets.xcassets */,
 				EDF76DA920B6A8F800F26C06 /* LaunchScreen.storyboard */,
 				EDF76DAC20B6A8F800F26C06 /* Info.plist */,
-				EDF76DB920B6BAAE00F26C06 /* GetListOfProducts.swift */,
 				EDF76DBB20B6BD4C00F26C06 /* FireBaseAPIClient.swift */,
 				EDF76DBF20B72C7100F26C06 /* FireBaseAPIAuthentication.swift */,
-				EDF76DBD20B7142200F26C06 /* PostProduct.swift */,
-				EDF76DC120B72D9600F26C06 /* User.swift */,
-				EDF76DC320B7578700F26C06 /* PostSignInUser.swift */,
 				EDF76DC520B7FB0600F26C06 /* ActionViewController.swift */,
+				EDF76DCC20BB0F2100F26C06 /* User.swift */,
 			);
 			path = TestFireBaseRest;
 			sourceTree = "<group>";
@@ -100,6 +100,41 @@
 				EDF76DB720B6B7D600F26C06 /* RequestError.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		EDF76DC720BB02FA00F26C06 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				EDF76DCE20BB33A900F26C06 /* Put */,
+				EDF76DC920BB033900F26C06 /* Post */,
+				EDF76DC820BB033100F26C06 /* Get */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		EDF76DC820BB033100F26C06 /* Get */ = {
+			isa = PBXGroup;
+			children = (
+				EDF76DB920B6BAAE00F26C06 /* GetListOfProducts.swift */,
+			);
+			path = Get;
+			sourceTree = "<group>";
+		};
+		EDF76DC920BB033900F26C06 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				EDF76DBD20B7142200F26C06 /* PostProduct.swift */,
+				EDF76DC320B7578700F26C06 /* PostSignInUser.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		EDF76DCE20BB33A900F26C06 /* Put */ = {
+			isa = PBXGroup;
+			children = (
+				EDF76DCA20BB04D800F26C06 /* PutUserProduct.swift */,
+			);
+			path = Put;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,17 +208,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDF76DCB20BB04D800F26C06 /* PutUserProduct.swift in Sources */,
 				EDF76DB420B6B76E00F26C06 /* HTTPParameter.swift in Sources */,
 				EDF76DBA20B6BAAE00F26C06 /* GetListOfProducts.swift in Sources */,
 				EDF76DC620B7FB0600F26C06 /* ActionViewController.swift in Sources */,
 				EDF76DA320B6A8F600F26C06 /* ViewController.swift in Sources */,
 				EDF76DBE20B7142200F26C06 /* PostProduct.swift in Sources */,
+				EDF76DCD20BB0F2100F26C06 /* User.swift in Sources */,
 				EDF76DB820B6B7D600F26C06 /* RequestError.swift in Sources */,
 				EDF76DBC20B6BD4C00F26C06 /* FireBaseAPIClient.swift in Sources */,
 				EDF76DC020B72C7100F26C06 /* FireBaseAPIAuthentication.swift in Sources */,
 				EDF76DB620B6B7AD00F26C06 /* URLQueryEncoder.swift in Sources */,
 				EDF76DC420B7578700F26C06 /* PostSignInUser.swift in Sources */,
-				EDF76DC220B72D9600F26C06 /* User.swift in Sources */,
 				EDF76DA120B6A8F600F26C06 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

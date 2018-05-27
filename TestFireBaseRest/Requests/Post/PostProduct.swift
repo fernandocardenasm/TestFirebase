@@ -9,7 +9,8 @@
 import Foundation
 
 class PostProduct: APIRequest {
-    typealias Response = Product?
+    
+    typealias Response = NewObjectId
     
     var resourceName: String {
         return "/products"

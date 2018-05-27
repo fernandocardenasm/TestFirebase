@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     
     let APIAuthentication = FireBaseAPIAuthentication()
     
-    var userResponse: UserResponse?
+    var userResponse: UserLoggedIn?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
 //            
 //        }
         
-        APIAuthentication.signIn(PostSignInUser(), object: User(email: "a@abc.com", password: "abcdef", returnSecureToken: true)) { (response) in
+        APIAuthentication.signIn(PostSignInUser(), object: UserRequest(email: "b@abc.com", password: "123456", returnSecureToken: true)) { (response) in
             switch response {
             case .success(let value):
 //                print(value)
@@ -73,7 +73,7 @@ struct Product: Codable {
 
 protocol APIClient {
     func send <T: APIRequest>(_ request: T, idToken: String, completion: @escaping ResultCallback<T.Response>)
-    func submit <T: APIRequest, M: Encodable>(_ request: T, object: M, idToken: String, completion: ((Error?)->Void)?)
+    func submit <T: APIRequest, M: Encodable>(_ request: T, object: M, idToken: String, completion: @escaping ResultCallback<T.Response>)
 }
 
 protocol APIRequest: Encodable {

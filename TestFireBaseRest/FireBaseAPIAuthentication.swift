@@ -12,7 +12,7 @@ public class FireBaseAPIAuthentication {
     
     public let baseEndpoint = "https://www.googleapis.com/identitytoolkit/v3/relyingparty"
     
-    let key = "AIzaSyDUikkW4eertVjSEKha66A5w7sHsOsJX5o"
+    private let key = "AIzaSyDUikkW4eertVjSEKha66A5w7sHsOsJX5o"
     
     private let session = URLSession(configuration: .default)
     
@@ -33,7 +33,7 @@ public class FireBaseAPIAuthentication {
             let jsonData = try encoder.encode(object)
             // ... and set our request's HTTP body
             urlRequest.httpBody = jsonData
-//            print("jsonData: ", String(data: urlRequest.httpBody!, encoding: .utf8) ?? "no body data")
+            print("jsonData: ", String(data: urlRequest.httpBody!, encoding: .utf8) ?? "no body data")
         } catch {
              completion(.failure(error))
         }
@@ -41,7 +41,7 @@ public class FireBaseAPIAuthentication {
         let task = session.dataTask(with: urlRequest) { data, response, error in
             
             // APIs usually respond with the data you just sent in your POST request
-            if let data = data, let utf8Representation = String(data: data, encoding: .utf8) {
+            if let data = data{
 //                print("response: ", utf8Representation)
                 do {
                     let decoder = JSONDecoder()

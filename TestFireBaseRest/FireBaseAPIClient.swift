@@ -38,7 +38,7 @@ public class FireBaseAPIClient: APIClient {
         
     }
     
-    func submit<T: APIRequest, M: Encodable>(_ request: T, object: M, idToken: String, completion: ((Error?)->Void)?) {
+    func submit<T: APIRequest, M: Encodable>(_ request: T, object: M, idToken: String, completion: @escaping ResultCallback<T.Response>) {
         
 //        var urlComponents = URLComponents()
 //        urlComponents.scheme = "https"
@@ -58,19 +58,76 @@ public class FireBaseAPIClient: APIClient {
             urlRequest.httpBody = jsonData
             print("jsonData: ", String(data: urlRequest.httpBody!, encoding: .utf8) ?? "no body data")
         } catch {
-            completion?(error)
+            completion(.failure(error))
         }
         
-        let task = session.dataTask(with: urlRequest) { (responseData, response, responseError) in
-            guard responseError == nil else {
-                completion?(responseError!)
-                return
-            }
+        let task = session.dataTask(with: urlRequest) { (data, response, error) in
             // APIs usually respond with the data you just sent in your POST request
-            if let data = responseData, let utf8Representation = String(data: data, encoding: .utf8) {
+            if let data = data, let utf8Representation = String(data: data, encoding: .utf8) {
                 print("response: ", utf8Representation)
-            } else {
+//                completion(.success(data))
+                do {
+                    let decoder = JSONDecoder()
+                    let newObjectId = try decoder.decode(T.Response.self, from: data)
+                    completion(.success(newObjectId))
+                }
+                catch{
+                    completion(.failure(error))
+                }
+                
+                
+                
+            } else if let error = error {
                 print("no readable data received in response")
+                completion(.failure(error))
+            }
+        }
+        task.resume()
+        
+    }
+    
+    func update<T: APIRequest, M: Encodable>(_ request: T, object: M,  idToken: String, completion: @escaping ResultCallback<T.Response>) {
+        
+        //        var urlComponents = URLComponents()
+        //        urlComponents.scheme = "https"
+        //        urlComponents.host = "testrest-489ba.firebaseio.com"
+        //        urlComponents.path = "/products.json?"
+        //        guard let url = urlComponents.url else { fatalError("Could not create URL from components") }
+        
+        let endpoint = self.endpoint(for: request, idToken: idToken)
+        var urlRequest = URLRequest(url: endpoint)
+        urlRequest.httpMethod = "PUT"
+        
+        // Now let's encode out Post struct into JSON data...
+        let encoder = JSONEncoder()
+        do {
+            let jsonData = try encoder.encode(object)
+            // ... and set our request's HTTP body
+            urlRequest.httpBody = jsonData
+            print("jsonData: ", String(data: urlRequest.httpBody!, encoding: .utf8) ?? "no body data")
+        } catch {
+            completion(.failure(error))
+        }
+        
+        let task = session.dataTask(with: urlRequest) { (data, response, error) in
+            // APIs usually respond with the data you just sent in your POST request
+            if let data = data, let utf8Representation = String(data: data, encoding: .utf8) {
+                print("response: ", utf8Representation)
+                //                completion(.success(data))
+                do {
+                    let decoder = JSONDecoder()
+                    let responseDecoded = try decoder.decode(T.Response.self, from: data)
+                    completion(.success(responseDecoded))
+                }
+                catch{
+                    completion(.failure(error))
+                }
+                
+                
+                
+            } else if let error = error {
+                print("no readable data received in response")
+                completion(.failure(error))
             }
         }
         task.resume()
@@ -79,7 +136,7 @@ public class FireBaseAPIClient: APIClient {
     
     func endpoint<T: APIRequest>(for request: T, idToken: String) -> URL {
         guard let parameters = try? URLQueryEncoder.encode(request) else { fatalError("Wrong parameters")}
-        
+
         return URL(string: "\(baseEndpoint)\(request.resourceName).json?\(parameters)&auth=\(idToken)")!
     }
     
